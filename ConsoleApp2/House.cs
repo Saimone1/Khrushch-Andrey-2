@@ -8,69 +8,43 @@ namespace ConsoleApp2
 {
     public class House
     {
-        public void Print()
+        public House()
+        {   
+            Windows window1 = new Windows();
+            Windows window2 = new Windows();
+            Windows window3 = new Windows();
+            Doors maindoor = new Doors();
+            Doors door1 = new Doors();
+            Console.WriteLine("Створений базовий дiм (3 вiкна, 2 дверi)");
+            Console.WriteLine();
+        }
+
+        static House()
+        {
+            WindList = new List<Windows>();
+
+            DoorList = new List<Doors>();
+        }
+
+        public static void CheckCount()
         {
             Console.WriteLine();
             Console.WriteLine("Кiлькiсть вiкон у будинку - " + Windows.Num);
             Console.WriteLine("Кiлькiсть дверей у будинку - " + Doors.Num);
         }
-        public void Add(Components component)
-        {
-            component.Add();
-            Console.WriteLine("Доданий об'єкт " + component.ToString());    
-        }
-    }
-    public abstract class Components
-    {
-        public abstract void Add();
-    }
-    public class Windows : Components
-    {
-        public static int Num;
 
-        public override void Add()
-        {
-            Num++;
-        }
-    }
-    public class Doors : Components
-    {
-        public static int Num = 0;
-        private bool Lock1 = false;
+        public static List<Windows> WindList;
 
-        public override void Add()
+        public static List<Doors> DoorList;
+
+        public static List<Windows> GetWindList()
         {
-            Num++;
+            return WindList;
         }
 
-        public bool Lock()
+        public static List<Doors> GetDoorList()
         {
-            string answ;
-            if (!this.Lock1)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Дверi " + "вiдчиненi");
-                Console.WriteLine("Зачинити дверi?");
-                answ = Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("Дверi зачиненi");
-                Console.WriteLine("Вiдчинити дверi?");
-                answ = Console.ReadLine();
-
-            }
-            if (answ.ToUpper() == "YES")
-            {
-                Console.WriteLine("Дверi зачинились/вiдчинились!");
-                return this.Lock1 = !this.Lock1;
-            }
-            else
-            {
-                Console.WriteLine("");
-                return this.Lock1;
-            }
+            return DoorList;
         }
     }
 }
